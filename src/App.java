@@ -14,7 +14,7 @@ interface Vehicle {
 }
 
 /**
- *
+ * CarVehicle
  */
 interface CarVehicle {
   int numberOfDoors();
@@ -41,31 +41,51 @@ interface TruckVehicle {
   String transmittionType(); // manual or automatic
   void setCartoCapacity(float capacity); // setter
   void setTransmittionType(String type); // setter
-
 }
+
 
 /**
  *
  */
 class Car implements Vehicle, CarVehicle {
+
+   private String varMake;
+   private String varModel;
+   private int varYear;
+   private int varNumber;
+   private String varType;
+
+   Car (
+    String varMake,
+    String varModel,
+    int varYear,
+    int varNumber,
+    String varType
+        ) {
+    this.varMake = varMake;
+    this.varModel = varModel;
+    this.varNumber = varNumber;
+    this.varYear = varYear;
+    this.varType = varType;
+   }
    public String make() {
-    return "";
+    return varMake;
    }
 
    public String model() {
-    return "";
+    return varModel;
    }
 
    public int year() {
-    return 0;
+    return varYear;
    }
 
    public int numberOfDoors() {
-      return 0;
+      return varNumber;
    }
 
    public String fuelType() {
-        return "";
+        return varType;
    }
 
   public void setNumberOfDoors(int doors) {};
@@ -76,24 +96,45 @@ class Car implements Vehicle, CarVehicle {
  *
  */
 class Motorcycle implements Vehicle, MotorVehicle {
-  public String make() {
-   return "";
-  }
 
-  public String model() {
-   return "";
-  }
+  private String varMake;
+  private String varModel;
+  private int varYear;
+  private int varNumber;
+  private String varType;
 
-  public int year() {
-   return 0;
-  }
+  Motorcycle (
+    String varMake,
+    String varModel,
+    int varYear,
+    int varNumber,
+    String varType
+        ) {
+    this.varMake = varMake;
+    this.varModel = varModel;
+    this.varNumber = varNumber;
+    this.varYear = varYear;
+    this.varType = varType;
+   }
+
+   public String make() {
+    return varMake;
+   }
+
+   public String model() {
+    return varModel;
+   }
+
+   public int year() {
+    return varYear;
+   }
 
   public int numberOfWheels() {
-     return 0;
+     return varNumber;
   }
 
   public String motorcycleType() {
-       return "";
+       return varType;
   }
 
   public void setNumberOfWheels(int number) {};
@@ -105,24 +146,46 @@ class Motorcycle implements Vehicle, MotorVehicle {
  *
  */
 class Truck implements Vehicle, TruckVehicle {
-  public String make() {
-   return "";
-  }
 
-  public String model() {
-   return "";
-  }
+  private String varMake;
+  private String varModel;
+  private int varYear;
+  private int varCapacity;
+  private String varType;
 
-  public int year() {
-   return 0;
-  }
+  Truck (
+    String varMake,
+    String varModel,
+    int varYear,
+    int varCapacity,
+    String varType
+        ) {
+    this.varMake = varMake;
+    this.varModel = varModel;
+    this.varCapacity = varCapacity;
+    this.varYear = varYear;
+    this.varType = varType;
+   }
+
+
+   public String make() {
+    return varMake;
+   }
+
+   public String model() {
+    return varModel;
+   }
+
+   public int year() {
+    return varYear;
+   }
 
   public float cargoCapacity() {
-     return 0.0f;
+     return varCapacity;
   }
 
   public String transmittionType() {
-       return "";
+       return varType;
   }
 
   public void setCartoCapacity(float capacity) {};
