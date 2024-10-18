@@ -17,10 +17,12 @@ public class App {
 
     }
 
+    /**
+     * The method to handle user inputs and print the result
+     */
     static void userAdmin() {
       Scanner scanner = new Scanner(System.in);
       boolean userInput = true;
-
 
       do {
         System.out.println("Please choose the Vehicle: car, motorcycle or truck. If you want to exit, enter 1");
@@ -134,7 +136,7 @@ public class App {
 }
 
 /**
- * Vehicle
+ * Interface Vehicle that have three methods: make(), model(), and year()
  */
 interface Vehicle {
   String make();
@@ -143,7 +145,8 @@ interface Vehicle {
 }
 
 /**
- * CarVehicle
+ * CarVehicle interface, that have 4 methods: numberOfDoors(), fuelType(),
+ * setNumberOfDoors(int doors), and setFuelType(String fuel);
  */
 interface CarVehicle {
   int numberOfDoors();
@@ -153,7 +156,10 @@ interface CarVehicle {
 }
 
 /**
- * MotorVehicle
+ * MotorVehicle interface, that have 4 methods: numberOfWheels(),
+ * motorcycleType(), setNumberOfWheels(int number),
+ * setMotorcycleType(String type);
+}
  */
 interface MotorVehicle {
   int numberOfWheels();
@@ -163,40 +169,62 @@ interface MotorVehicle {
 }
 
 /**
- * TruckVehicle
+ * TruckVehicle interface, that have 4 methods: float cargoCapacity(),
+ * transmittionType(), setCartoCapacity(float capacity),
+ * setTransmittionType(String type)
  */
 interface TruckVehicle {
   float cargoCapacity(); // in tons
-  String transmittionType(); // manual or automatic
+  String transmissionType(); // manual or automatic
   void setCartoCapacity(float capacity); // setter
-  void setTransmittionType(String type); // setter
+  void setTransmissionType(String type); // setter
 }
 
 /**
- *
+ * Astract class of Vehicle, that implements of Vehicle. It contains protected
+ * variables make, model, and year; Constructor, and three methods: make, model,
+ * year.
  */
 abstract class AbstractVehicle implements Vehicle  {
     protected String make;
     protected String model;
     protected int year;
 
+    /**
+     * Abstract Vehicle constructor
+     * @param make make of vehicle in String
+     * @param model model of vehicle in String
+     * @param year year in integer
+     */
     public AbstractVehicle(String make, String model, int year) {
         this.make = make;
         this.model = model;
         this.year = year;
     }
+    /**
+     * Abstract getter method that returns make of vehicle
+     */
     public String make() {
       return make;
     }
 
+    /**
+     * Abstract getter method that returns model of vehicle
+     */
     public String model() {
       return model;
     }
 
+    /**
+     * Abstract getter method that returns year of vehicle
+     */
     public int year() {
       return year;
     }
 
+    /**
+     * Overrides the method ToString and returns information of vehicle
+     */
     @Override
     public String toString() {
         return "Make: " + make + ", Model: " + model + ", Year: " + year;
@@ -205,14 +233,21 @@ abstract class AbstractVehicle implements Vehicle  {
 
 
 /**
- *
+ * Class Car that extends AbstractVehicle and implements CarVehicle
  */
 class Car extends AbstractVehicle implements CarVehicle  {
 
   private int numberOfDoors;
   private String fuel;
 
-
+   /**
+    * Constructor Car
+    * @param make String
+    * @param model String
+    * @param year String
+    * @param numberOfDoors int variable
+    * @param fuel String
+    */
    Car (
     String make,
     String model,
@@ -220,23 +255,36 @@ class Car extends AbstractVehicle implements CarVehicle  {
     int numberOfDoors,
     String fuel
         ) {
-    super(make, model, year);
+    super(make, model, year); // Takse information from superclass
     this.numberOfDoors = numberOfDoors;
     this.fuel = fuel;
    }
 
+   /**
+    * Getter, returns number of doors
+    */
    public int numberOfDoors() {
       return numberOfDoors;
    }
 
+   /**
+    * Getter, returns type of fuel
+    */
    public String fuelType() {
         return fuel;
    }
 
+  /**
+   * Setter: sets number of doors
+   */
   public void setNumberOfDoors(int number) {
     this.numberOfDoors = number;
   };
 
+  /**
+   * Setter: sets on of these types of fuel: petrol, diesel, or electric.
+   * Catchs error if type of fuel is incorrect.
+   */
   public void setFuelType(String fuel) {
     if (fuel.equals("petrol")
     || fuel.equals("diesel")
@@ -247,20 +295,35 @@ class Car extends AbstractVehicle implements CarVehicle  {
     }
   };
 
+  /**
+   * Prints information about car, overrides the method from Object class.
+   */
   @Override
   public String toString() {
-      return "Vehicle: Car, " + super.toString() + ", Number of Doors: " + numberOfDoors + ", Fuel Type: " + fuel;
+      return "Vehicle: Car, "
+      + super.toString()
+      + ", Number of Doors: "
+      + numberOfDoors + ", Fuel Type: "
+      + fuel;
   }
 }
 
 /**
- *
+ * Class Motorcycle that extends AbstractVehicle and implements MotorVehicle
  */
 class Motorcycle extends AbstractVehicle implements MotorVehicle {
 
   private int numberOfWheels;
   private String motorType;
 
+  /**
+   * Constructor  of Motorcycle
+   * @param make String
+   * @param model String
+   * @param year String
+   * @param numberOfWheels int
+   * @param motorType String
+   */
   Motorcycle (
     String make,
     String model,
@@ -273,18 +336,31 @@ class Motorcycle extends AbstractVehicle implements MotorVehicle {
     this.motorType = motorType;
    }
 
+  /**
+   * Getter: retursn number of wheels
+   */
   public int numberOfWheels() {
      return numberOfWheels;
   }
 
+  /**
+   * Getter: returns type of motorcycle
+   */
   public String motorcycleType() {
        return motorType;
   }
 
+  /**
+   * Setter: sets the number of wheels
+   */
   public void setNumberOfWheels(int number) {
     this.numberOfWheels = number;
   };
 
+  /**
+   * Setter: sets the type of motorcycle: sport, cruiser or off-road
+   * Catchs error in case of incorrect type
+   */
   public void setMotorcycleType(String type) {
     if (type.equals("sport")
     || type.equals("cruiser")
@@ -295,55 +371,93 @@ class Motorcycle extends AbstractVehicle implements MotorVehicle {
     }
   };
 
+  /**
+   * Overrides from Object class method ToString(). That returns information
+   * about Motorcycle.
+   */
   @Override
   public String toString() {
-      return "Vehicle: Motorcycle, " + super.toString() + ", Number of Wheels: " + numberOfWheels + ", Motorcycle Type: " + motorType;
+      return "Vehicle: Motorcycle, "
+      + super.toString()
+      + ", Number of Wheels: "
+      + numberOfWheels
+      + ", Motorcycle Type: "
+      + motorType;
   }
 
 }
 
 /**
- *
+ * Class Truck that extends AbstractVehicle and implements TruckVehicle
  */
 class Truck extends AbstractVehicle implements TruckVehicle {
 
   private float cargoCapacity;
-  private String transmittionsType;
+  private String transmissionsType;
 
+  /**
+   * Constructor truck
+   * @param make String
+   * @param model String
+   * @param year int
+   * @param cargoCapacity float
+   * @param transmissionsType String
+   */
   Truck (
     String make,
     String model,
     int year,
     float cargoCapacity,
-    String transmittionsType
+    String transmissionsType
         ) {
     super(make, model, year);
     this.cargoCapacity = cargoCapacity;
-    this.transmittionsType = transmittionsType;
+    this.transmissionsType = transmissionsType;
    }
 
+  /**
+   * Getter: returns capacity value in float
+  */
   public float cargoCapacity() {
      return cargoCapacity;
   }
 
-  public String transmittionType() {
-       return transmittionsType;
+  /**
+   * Getter: returns type pf transmission
+   */
+  public String transmissionType() {
+       return transmissionsType;
   }
 
+  /**
+   * Setter: sets capacity
+   */
   public void setCartoCapacity(float capacity) {
     this.cargoCapacity = capacity;
   };
 
-  public void setTransmittionType(String type) {
+  /**
+   * Setter: sets type of transmission: manual or automatic
+   * Handles error in case of incorrect type
+   */
+  public void setTransmissionType(String type) {
     if (type.equals("manual") || type.equals("automatic")) {
-      this.transmittionsType = type;
+      this.transmissionsType = type;
     } else {
       System.err.println("Incorrect type of transmittion");
     }
   };
 
+  /**
+   * Returns information about Truck in string.
+   */
   @Override
   public String toString() {
-      return "Vehicle: Truck, " + super.toString() + ", Capacity: " + cargoCapacity + " tons, Transmittion Type: " + transmittionsType;
+      return "Vehicle: Truck, "
+      + super.toString()
+      + ", Capacity: "
+      + cargoCapacity
+      + " tons, Transmission Type: "
+      + transmissionsType;
   }
 }
