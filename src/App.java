@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
@@ -6,17 +7,20 @@ public class App {
         Motorcycle motorcycle1 = new Motorcycle("Yamaha", "YZF-R1", 2020, 2, "sport");
         Truck truck1 = new Truck("Ford", "F-150", 2023, 5.0f, "manual");
 
-        System.out.println(car1); // Calls toString method
-        System.out.println(motorcycle1); // Calls toString method
-        System.out.println(truck1); // Calls toString method
+        System.out.println(car1);
+        System.out.println(motorcycle1);
+        System.out.println(truck1);
+        System.out.println("");
 
         userAdmin();
 
 
     }
+
     static void userAdmin() {
       Scanner scanner = new Scanner(System.in);
       boolean userInput = true;
+
 
       do {
         System.out.println("Please choose the Vehicle: car, motorcycle or truck. If you want to exit, enter 1");
@@ -24,13 +28,94 @@ public class App {
 
         switch (vehicle) {
           case "car": {
+            try {
+
+              System.out.println("Enter make:");
+              String make = scanner.nextLine();
+              System.out.println("Enter model:");
+              String model = scanner.nextLine();
+              System.out.println("Enter year:");
+              int year = scanner.nextInt();
+
+              scanner.nextLine();
+
+              System.out.println("Enter number of doors");
+              int doors = scanner.nextInt();
+
+              scanner.nextLine();
+
+              System.out.println("Enter type of fuel (petrol, diesel, or electric)");
+              String type = scanner.nextLine().toLowerCase();
+
+
+              Car myCar = new Car(make, model, year, doors, type);
+              System.out.println(myCar);
+              System.out.println("");
+            }
+            catch (InputMismatchException e) {
+                    System.err.println("Invalid input! Please enter correct values." + e);
+                    scanner.nextLine();
+            }
 
             break;
           }
           case "motorcycle": {
+            try {
+              System.out.println("Enter make:");
+              String make = scanner.nextLine();
+              System.out.println("Enter model:");
+              String model = scanner.nextLine();
+              System.out.println("Enter year:");
+              int year = scanner.nextInt();
+
+              scanner.nextLine();
+
+              System.out.println("Enter number of wheels");
+              int wheels = scanner.nextInt();
+
+              scanner.nextLine();
+
+              System.out.println("Enter type of motorcycle (sport, cruiser, off-road):");
+              String type = scanner.nextLine().toLowerCase();
+
+              Motorcycle myMoto = new Motorcycle(make, model, year, wheels, type);
+              System.out.println(myMoto);
+              System.out.println("");
+            }
+            catch (InputMismatchException e){
+              System.err.println("Invalid input! Please enter correct values." + e);
+              scanner.nextLine();
+            }
             break;
           }
           case "truck": {
+            try {
+              System.out.println("Enter make:");
+              String make = scanner.nextLine();
+              System.out.println("Enter model:");
+              String model = scanner.nextLine();
+              System.out.println("Enter year:");
+              int year = scanner.nextInt();
+
+              scanner.nextLine();
+
+              System.out.println("Enter capacity");
+              float capacity = scanner.nextFloat();
+
+              scanner.nextLine();
+
+              System.out.println("Enter type of transmission (manual or automatic):");
+              String type = scanner.nextLine().toLowerCase();
+
+
+              Truck myTruck = new Truck(make, model, year, capacity, type);
+              System.out.println(myTruck);
+              System.out.println("");
+            }
+            catch (InputMismatchException e) {
+              System.err.println("Invalid input! Please enter correct values." + e);
+              scanner.nextLine();
+            }
             break;
           }
 
@@ -39,7 +124,7 @@ public class App {
             break;
           }
           default:  {
-            System.err.println("Incorrect input, please choos car, motorcycle or truck");
+            System.err.println("Incorrect input, please choose car, motorcycle or truck");
           }
         }
       } while (userInput);
@@ -259,6 +344,6 @@ class Truck extends AbstractVehicle implements TruckVehicle {
 
   @Override
   public String toString() {
-      return "Vehicle: Truck, " + super.toString() + ", Capacity: " + cargoCapacity + ", Transmittion Type: " + transmittionsType;
+      return "Vehicle: Truck, " + super.toString() + ", Capacity: " + cargoCapacity + " tons, Transmittion Type: " + transmittionsType;
   }
 }
