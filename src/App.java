@@ -43,17 +43,37 @@ interface TruckVehicle {
   void setTransmittionType(String type); // setter
 }
 
+abstract class AbstractVehicle implements Vehicle  {
+    protected String make;
+    protected String model;
+    protected int year;
+
+    public AbstractVehicle(String make, String model, int year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+    public String make() {
+      return make;
+    }
+
+    public String model() {
+      return model;
+    }
+
+    public int year() {
+      return year;
+    }
+}
+
 
 /**
  *
  */
-class Car implements Vehicle, CarVehicle {
+class Car extends AbstractVehicle implements CarVehicle  {
 
-   private String varMake;
-   private String varModel;
-   private int varYear;
-   private int varNumber;
-   private String varType;
+  private int varNumber;
+  private String varType;
 
    Car (
     String varMake,
@@ -62,22 +82,9 @@ class Car implements Vehicle, CarVehicle {
     int varNumber,
     String varType
         ) {
-    this.varMake = varMake;
-    this.varModel = varModel;
+    super(varMake, varModel, varYear);
     this.varNumber = varNumber;
-    this.varYear = varYear;
     this.varType = varType;
-   }
-   public String make() {
-    return varMake;
-   }
-
-   public String model() {
-    return varModel;
-   }
-
-   public int year() {
-    return varYear;
    }
 
    public int numberOfDoors() {
@@ -95,11 +102,8 @@ class Car implements Vehicle, CarVehicle {
 /**
  *
  */
-class Motorcycle implements Vehicle, MotorVehicle {
+class Motorcycle extends AbstractVehicle implements MotorVehicle {
 
-  private String varMake;
-  private String varModel;
-  private int varYear;
   private int varNumber;
   private String varType;
 
@@ -110,23 +114,9 @@ class Motorcycle implements Vehicle, MotorVehicle {
     int varNumber,
     String varType
         ) {
-    this.varMake = varMake;
-    this.varModel = varModel;
+    super(varMake, varModel, varYear);
     this.varNumber = varNumber;
-    this.varYear = varYear;
     this.varType = varType;
-   }
-
-   public String make() {
-    return varMake;
-   }
-
-   public String model() {
-    return varModel;
-   }
-
-   public int year() {
-    return varYear;
    }
 
   public int numberOfWheels() {
@@ -145,11 +135,8 @@ class Motorcycle implements Vehicle, MotorVehicle {
 /**
  *
  */
-class Truck implements Vehicle, TruckVehicle {
+class Truck extends AbstractVehicle implements TruckVehicle {
 
-  private String varMake;
-  private String varModel;
-  private int varYear;
   private int varCapacity;
   private String varType;
 
@@ -160,24 +147,9 @@ class Truck implements Vehicle, TruckVehicle {
     int varCapacity,
     String varType
         ) {
-    this.varMake = varMake;
-    this.varModel = varModel;
+    super(varMake, varModel, varYear);
     this.varCapacity = varCapacity;
-    this.varYear = varYear;
     this.varType = varType;
-   }
-
-
-   public String make() {
-    return varMake;
-   }
-
-   public String model() {
-    return varModel;
-   }
-
-   public int year() {
-    return varYear;
    }
 
   public float cargoCapacity() {
